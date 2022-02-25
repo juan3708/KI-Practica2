@@ -1,23 +1,25 @@
-import express from 'express';
-import sequelize from './database/db';
+import express, {json, urlencoded} from 'express';
+import morgan from 'morgan';
+import cargoRoutes from '../src/routes/cargo';
+
 const app = express();
 
-//Configuración
-const PORT = process.env.PORT || 3000;
-
-//Rutas
-app.get('/', function (req, res){
-    res.send('HOLA');
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
 });
 
-//Levantamiento servidor
-app.listen(PORT, function () {
-    console.log('Server on port 3000');
+//middlewares
+app.use(morgan('dev'));
+app.use(urlencoded({
+    extended: true
+}));
+app.use(json());
 
-    //Conexion Base de datos
-    sequelize.authenticate().then(() => {
-        console.log("Nos hemos conectado a la base de datos");
-    }).catch(error => {
-        console.log('Se ha producido un error', error);
-    })
-});
+//routes
+app.use('/api/cargo', cargoRoutes);
+
+export default app;

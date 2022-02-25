@@ -1,8 +1,7 @@
 import {Sequelize} from 'sequelize';
-import sequelize, {Sequelize} from '../database/db';
-import Aviso from '../models/aviso';
+import {sequelize} from '../database/db';
 
-const Cargo = sequelize.define('cargo',{
+const Cargo = sequelize.define('cargo', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -15,21 +14,6 @@ const Cargo = sequelize.define('cargo',{
 },{
     timestamps: false,
     tableName: 'cargo'
-});
-
-//Definicion relacion con aviso
-
-Cargo.hasMany(Aviso,{
-    foreignKey:{
-        name: 'cargo_id',
-    },
-    sourceKey: 'id'
-})
-Aviso.belongsTo (Cargo, {
-    foreignKet: {
-        name: 'cargo_id',
-    },
-    sourceKey: 'id'
 });
 
 export default Cargo;
