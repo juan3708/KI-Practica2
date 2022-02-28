@@ -8,31 +8,11 @@
     flex-wrap: wrap;
 }
 
-.imagen-port{
-    width: 320px;
-    margin: 10px;
+.card{
+    width: 13%;
+    margin: 10%;
     overflow: hidden;
     border-radius: 4%;
     cursor: pointer;
     box-shadow: 0 0 6px 0 rgba(5, 0, 0, 0.637);
 }
-
-/*.imagen-port > img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-
-}*/
-
-/*.barra{
-    color: white;
-    background-color: #00b1dd;
-    height: 150px;
-}
-
-.line-grey{
-    border-right: solid 1px #ffffff;
-    justify-content: center;
-    align-items: center;
-}*/
