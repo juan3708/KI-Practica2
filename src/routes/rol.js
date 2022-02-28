@@ -6,6 +6,6 @@ const router = Router();
 router.post('/crear', crearRol);
 router.get('/listar', listarRol);
 router.put('/editar', editarRol);
-//router.delete('/eliminar', eliminarCategoria);
+//router.delete('/eliminar', eliminarRol);
 
 export default router;
