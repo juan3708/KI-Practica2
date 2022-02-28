@@ -1,86 +1,85 @@
-import Cargo from "../models/cargo";
+import Categoria from "../models/categoria";
 
-export async function crearCargo(req,res){
+export async function crearCategoria (req, res){
     const {nombre} = req.body;
     try{
-        let nuevoCargo = await Cargo.create({
+        let nuevaCategoria = await Categoria.create({
             nombre
         })
-        if(nuevoCargo){
-            res.json ({
+        if(nuevaCategoria){
+            res.json({
                 code:200,
-                message: 'Cargo creado con exito',
-                data: nuevoCargo
+                message: 'Categoria creada con exito',
+                data : nuevaCategoria
             });
         }
-    }catch (e){
+    }catch(e){
         res.json({
             code:400,
-            message: 'Error al crear el cargo',
+            message: 'Error al crear la categoria',
             error: e.errors
         });
     }
 }
 
-export async function listarCargo(req, res){
+export async function listarCategoria (req, res){
     try{
-        let cargos = await Cargo.findAll({
-             attributes: ['id','nombre']
+        let categorias = await Categoria.findAll({
+            attributes: ['id' , 'nombre']
         });
         res.json({
             code:200,
-            message: 'Cargos listados Con Exito',
-            cargos
+            message: 'Categorias listadas con exito',
+            categorias
         });
     }catch(e){
         res.json({
             code:400,
-            message: 'Error al listar los cargos',
+            message: 'Error al listar las categorias',
             error: e
         });
     }
 }
 
-export async function editarCargo (req, res){
-    const {id, nombre} =req.body;
+export async function editarCategoria (req, res){
+    const{id,nombre} = req.body;
     if(id && nombre){
         try{
-            let cargo = await Cargo.findOne({
-                where: {id:id},
-                attributes: ['id','nombre']
+            let categoria = await Categoria.findOne({
+                where:{id:id},
+                attributes: ['id' , 'nombre']
             });
-            if(cargo){
-                cargo.update({nombre});
-                res.json ({
+            if(categoria){
+                categoria.update({nombre});
+                res.json({
                     code:200,
-                    message: 'El cargo ha sido editado exitosamente',
-                    data: cargo
+                    message: 'La categoria ha sido editada con exito',
+                    data: categoria
                 });
             }else{
                 res.json({
                     code:400,
-                    message : 'El cargo no existe'
+                    message: 'La categoria no existe'
                 });
             }
         }catch(e){
             res.json({
                 code:401,
-                message: 'ERROR'
+                message :'Error'
             });
         }
     }else{
         res.json({
             code:203,
             message: 'No ha ingresado campos para editar'
-        })
+        });
     }
 }
-
-export async function eliminarCargo (req, res){
+export async function eliminarCategoria (req, res){
     const{id,nombre} = req.body;
     if(id && nombre){
         try{
-            let cargo = await Cargo.findOne({
+            let cargo = await Categoria.findOne({
                 where: {id:id},
                 attributes: ['id','nombre']
             });
@@ -88,12 +87,12 @@ export async function eliminarCargo (req, res){
                 cargo.destroy({nombre});
                 res.json ({
                     code:200,
-                    message: 'El cargo ha sido eliminado exitosamente',
+                    message: 'La categoria ha sido eliminada exitosamente',
                 });
             }else{
                 res.json({
                     code:400,
-                    message : 'El cargo no existe'
+                    message : 'La categoria no existe'
                 });
             }
         }catch(e){
