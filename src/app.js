@@ -1,6 +1,10 @@
 import express, {json, urlencoded} from 'express';
 import morgan from 'morgan';
 import cargoRoutes from '../src/routes/cargo';
+import categoriaRoutes from '../src/routes/categoria';
+import rolRoutes from '../src/routes/rol';
+import tecnologiaRoutes from '../src/routes/tecnologia';
+import textoRoutes from '../src/routes/texto';
 
 const app = express();
 
@@ -21,5 +25,10 @@ app.use(json());
 
 //routes
 app.use('/api/cargo', cargoRoutes);
+app.use('/api/categoria', categoriaRoutes);
+app.use('/api/rol', rolRoutes);
+app.use('/api/tecnologia', tecnologiaRoutes);
+app.use('/api/texto', textoRoutes);
+
 
 export default app;
