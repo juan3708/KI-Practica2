@@ -1,5 +1,6 @@
-import {Sequelize} from 'sequelize';
+import {DataTypes, Sequelize} from 'sequelize';
 import {sequelize} from '../database/db';
+import Usuario from './usuario';
 
 const Texto = sequelize.define('texto' ,{
     id: {
@@ -22,10 +23,18 @@ const Texto = sequelize.define('texto' ,{
     descripcion: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    operativo: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
     }
 },{
     timestamps: false,
     tableName: 'texto'
 });
+
+//Definicion relacion usuario
+Texto.belongsToMany (Usuario,{through: "texto_has_usuario"});
+Usuario.belongsToMany(Texto,{through: "texto_has_usuario"});
 
 export default Texto;
