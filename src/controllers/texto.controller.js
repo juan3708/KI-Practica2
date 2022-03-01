@@ -96,7 +96,7 @@ export async function eliminarTexto (req, res){
             }else{
                 res.json({
                     code:400,
-                    message : 'El informacion no existe'
+                    message : 'La informacion no existe'
                 });
             }
         }catch(e){
