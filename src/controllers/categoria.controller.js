@@ -36,7 +36,7 @@ export async function listarCategoria(req, res){
     }catch(e){
         res.json({
             code:400,
-            message: 'Error al listar los categorias',
+            message: 'Error al listar las categorias',
             error: e
         });
     }
