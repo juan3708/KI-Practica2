@@ -1,8 +1,8 @@
-import {Sequelize} from 'sequelize';
+import {DataTypes, Sequelize} from 'sequelize';
 import {sequelize} from '../database/db';
 import Usuario from './usuario';
 
-const Soluciones_servicios = sequelize.define('soluciones_servicio', {
+const Soluciones_servicios = sequelize.define('soluciones_servicios', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -30,8 +30,12 @@ const Soluciones_servicios = sequelize.define('soluciones_servicio', {
     },
     descripcion: {
         type: Sequelize.STRING,
-        allowNull:false
-    }   
+        allowNull: false
+    },
+    operativo: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    }
 },{
     timestamps: false,
     tableName: 'soluciones_servicios'
