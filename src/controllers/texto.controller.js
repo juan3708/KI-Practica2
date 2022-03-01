@@ -78,3 +78,37 @@ export async function editarTexto (req, res){
         });
     }
 }
+
+export async function eliminarTexto (req, res){
+    const{id, nombre_seccion, tag, titulo, descripcion, operativo} = req.body;
+    if(id && nombre_seccion && tag && titulo && descripcion && operativo){
+        try{
+            let texto = await Texto.findOne({
+                where: {id:id},
+                attributes: ['id']
+            });
+            if(texto){
+                await texto.update({operativo:false});
+                res.json ({
+                    code:200,
+                    message: 'La informacion ha sido eliminada exitosamente',
+                });
+            }else{
+                res.json({
+                    code:400,
+                    message : 'El informacion no existe'
+                });
+            }
+        }catch(e){
+            res.json({
+                code:401,
+                message: 'ERROR'
+            });
+        }
+    }else{
+        res.json({
+            code:203,
+            message: 'No ha ingresado campos para eliminar'
+        });
+    }
+}
