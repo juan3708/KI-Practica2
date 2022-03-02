@@ -1,5 +1,6 @@
-import {Sequelize} from 'sequelize';
+import {DataTypes, Sequelize} from 'sequelize';
 import {sequelize} from '../database/db';
+import Noticia from '../models/noticia';
 
 const Categoria = sequelize.define('categoria',{
     id: {
@@ -10,10 +11,29 @@ const Categoria = sequelize.define('categoria',{
     nombre: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    operativo: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
     }
 },{
     timestamps: false,
     tableName: 'categoria'
+});
+
+//Definicion relacion con noticia
+
+Categoria.hasMany(Noticia, {
+    foreignKey: {
+        name: 'categoria_id',
+    },
+    sourceKey: 'id'
+});
+Noticia.belongsTo(Categoria, {
+    foreignKey: {
+        name: 'categoria_id',
+    },
+    sourceKey: 'id'
 });
 
 export default Categoria;

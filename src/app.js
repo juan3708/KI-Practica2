@@ -5,6 +5,8 @@ import categoriaRoutes from '../src/routes/categoria';
 import rolRoutes from '../src/routes/rol';
 import tecnologiaRoutes from '../src/routes/tecnologia';
 import textoRoutes from '../src/routes/texto';
+import soluciones_serviciosRoutes from '../src/routes/soluciones_servicios';
+import noticiaRoutes from '../src/routes/noticia';
 
 const app = express();
 
@@ -29,6 +31,7 @@ app.use('/api/categoria', categoriaRoutes);
 app.use('/api/rol', rolRoutes);
 app.use('/api/tecnologia', tecnologiaRoutes);
 app.use('/api/texto', textoRoutes);
-
+app.use('/api/soluciones_servicios', soluciones_serviciosRoutes);
+app.use('/api/noticia', noticiaRoutes);
 
 export default app;

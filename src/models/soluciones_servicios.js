@@ -2,17 +2,25 @@ import {DataTypes, Sequelize} from 'sequelize';
 import {sequelize} from '../database/db';
 import Usuario from './usuario';
 
-const Texto = sequelize.define('texto' ,{
+const Soluciones_servicios = sequelize.define('soluciones_servicios', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
+    },
+    tipo: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
     nombre_seccion: {
         type: Sequelize.STRING,
         allowNull: false
     },
     tag: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    icono: {
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -30,11 +38,11 @@ const Texto = sequelize.define('texto' ,{
     }
 },{
     timestamps: false,
-    tableName: 'texto'
+    tableName: 'soluciones_servicios'
 });
 
-//Definicion relacion usuario
-Texto.belongsToMany (Usuario,{through: "texto_has_usuario"});
-Usuario.belongsToMany(Texto,{through: "texto_has_usuario"});
+//Definicion relacion con usuario
+Soluciones_servicios.belongsToMany (Usuario, {through: "soluciones_servicios_has_usuario"});
+Usuario.belongsToMany (Soluciones_servicios, {through: "soluciones_servicios_has_usuario"});
 
-export default Texto;
+export default Soluciones_servicios;
