@@ -30,6 +30,10 @@ export async function crearNoticia (req, res){
 export async function listarNoticia(req, res){
     try{
         let noticias = await Noticia.findAll({
+            include:[{
+                model: Categoria,
+                attributes: ['id']
+            }],
             attributes: ['id','titulo','cuerpo','estado', 'img']
         });
         res.json({
@@ -45,3 +49,50 @@ export async function listarNoticia(req, res){
         });
     }
 }
+
+export async function editarNoticia (req, res){
+    const {id, titulo,
+        cuerpo,
+        estado,
+        img,
+        } =req.body;
+    if(id && titulo && cuerpo && estado && img){
+        try{
+            let noticia = await Noticia.findOne({
+                where: {id:id},
+                include:[{
+                    model: Categoria,
+                    attributes: ['id']
+                }],
+                attributes: ['id', 'titulo',
+                    'cuerpo',
+                    'estado',
+                    'img']
+            });
+            if(noticia){
+                noticia.update({id, titulo, cuerpo, estado, img});
+                res.json ({
+                    code:200,
+                    message: 'La noticia ha sido editada exitosamente',
+                    data:noticia
+                });
+            }else{
+                res.json({
+                    code:400,
+                    message : 'la noticia no existe'
+                });
+            }
+        }catch(e){
+            res.json({
+                code:401,
+                message: 'ERROR'
+            });
+        }
+    }else{
+        res.json({
+            code:203,
+            message: 'No ha ingresado campos para editar'
+        })
+    }
+}
+
