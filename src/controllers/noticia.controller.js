@@ -96,3 +96,38 @@ export async function editarNoticia (req, res){
     }
 }
 
+export async function BuscarNoticiasPorCategoria(req, res) {
+    const {id} = req.body;
+    let Noticias = await Noticia.findAll({
+        where: {categoria_id: id },
+        include: [{
+            model: Categoria,
+            attributes: ['nombre']
+        }],
+        attributes: ['id','titulo',
+            'cuerpo',
+            'estado', 
+            'img']
+    });
+    res.json({
+        code: 200,
+        message: 'Se ha listado correctamente',
+        data: Noticias
+    });
+}
+
+export async function BuscarNoticiasPorEstado(req, res) {
+    const {estado} = req.body;
+    let Noticias = await Noticia.findAll({
+        where: {estado:estado},
+        attributes: ['id','titulo',
+            'cuerpo',
+            'estado', 
+            'img']
+    });
+    res.json({
+        code: 200,
+        message: 'Se ha listado correctamente',
+        data: Noticias
+    });
+}
