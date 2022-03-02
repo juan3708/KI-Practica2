@@ -1,18 +1,97 @@
-.Servicios{
-    background: #f2f2f2;
+:root {
+  --gradient: linear-gradient(to left top, #dd2476 10%, #ff512f 90%) !important;
 }
 
-.galeria-port{
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+body {
+  background: #ffffff !important;
 }
 
-.card{
-    width: 13%;
-    margin: 10%;
-    overflow: hidden;
-    border-radius: 4%;
-    cursor: pointer;
-    box-shadow: 0 0 6px 0 rgba(5, 0, 0, 0.637);
+.card {
+  display: block;
+  margin: auto;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  color: #000000cc;
+  margin-bottom: 2rem;
+}
+
+.card-title {
+  color: #272626;
+  text-align: center;
+  margin: auto;
+  padding-top: 7%;
+}
+
+.card-text {
+  padding-bottom: 5%;
+  margin: auto;
+  text-align: justify;
+}
+
+.card-img-top-1 {
+  padding-top: 5%;
+  width: 82px;
+  height: 62px;
+  display: block;
+  margin: auto;
+}
+
+.card-img-top-2 {
+  padding-top: 5%;
+  width: 46px;
+  height: 62px;
+  display: block;
+  margin: auto;
+}
+
+.card-img-top-3 {
+  padding-top: 5%;
+  width: 78px;
+  height: 60px;
+  display: block;
+  margin: auto;
+}
+
+.btn {
+  border: 5px solid #ffffff;
+  border-width: 2px;
+  border-image-slice: 1;
+  background: #f7921e !important;
+  -webkit-background-clip: border-box !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-image-source: #f7921e !important;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  margin: auto;
+  display: block;
+}
+
+.btn:hover,
+.btn:focus {
+  background: #ffffff !important;
+  -webkit-background-clip: none !important;
+  -webkit-text-fill-color: #f7921e !important;
+  border: 5px solid #ffffff !important;
+  box-shadow: #222 1px 0 10px;
+}
+
+.container {
+  display: block;
+  margin: auto;
+}
+
+.hover-galery {
+  background-color: #f7921e;
+}
+
+.divider {
+  height: 0.05rem;
+  max-width: 18rem;
+  margin: 1.5rem auto;
+  background-color: #f7921e;
+  opacity: 1;
+}
+
+.titulo{
+  padding-bottom: 2%;
 }

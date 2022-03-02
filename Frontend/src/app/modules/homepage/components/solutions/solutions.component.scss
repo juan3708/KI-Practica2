@@ -1,75 +1,87 @@
-.Soluciones{
-    background: #f2f2f2;
+:root {
+  --gradient: linear-gradient(to left top, #dd2476 10%, #ff512f 90%) !important;
 }
 
-.galeria-port{
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    
+body {
+  background: #ffffff !important;
 }
 
-.col{
-    width: 320px;
-    margin: 10px;
-    overflow: hidden;
-    border-radius: 4%;
-    cursor: pointer;
+.card {
+  display: block;
+  margin: auto;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  color: #000000cc;
+  margin-bottom: 2rem;
 }
 
-.card > img{
-    width: 35%;
-    height: 15%;
-    object-fit: cover;
-    display: block;
-    justify-content: center;
+.card-title {
+  color: #272626;
+  text-align: center;
+  margin: auto;
 }
 
-.hover-galeria{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    transform: scale(0);
-    background: #f5801e;
-    transition: transform .5s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.card-text{
+  padding-top: 5%;
+  padding-bottom: 5%;
+  margin: auto;
+  text-align: justify;
 }
 
-.hover-galeria img{
-    width: 50px;
+.card-img-top {
+  padding-top: 5%;
+  width: 100px;
+  display: block;
+  margin: auto;
 }
 
-.hover-galeria p{
-    color: rgb(255, 255, 255);
+.btn {
+  border: 5px solid #ffffff;
+  border-width: 2px;
+  border-image-slice: 1;
+  background: #F7921E !important;
+  -webkit-background-clip: border-box !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-image-source: #F7921E !important;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  margin: auto;
+  display: block;
 }
 
-.card:hover .hover-galeria{
-    transform: scale(1);
+.btn:hover,
+.btn:focus {
+  background: #ffffff !important;
+  -webkit-background-clip: none !important;
+  -webkit-text-fill-color: #F7921E !important;
+  border: 5px solid #ffffff !important;
+  box-shadow: #222 1px 0 10px;
+}
+
+.container {
+  display: block;
+  margin: auto;
+}
+
+.hover-galery{
+  background-color: #F7921E;
 }
 
 .barra{
-    color: white;
-    background-color: #00b1dd;
-    height: 150px;
+  padding-top: 30px;
+  color: white;
+  background-color: #00b1dd;
+  height: 140px;
+  width: 99%;
 }
 
 .line-grey{
-    border-right: solid 1px #ffffff;
-    justify-content: center;
-    align-items: center;
+  border-right: solid 1px #ffffff;
+  justify-content: center;
+  align-items: center;
+  display: block;
+  margin: auto;
 }
-
-.card-img-top{
-    width: 10%;
-    height: 10%;
-}
-
-.card{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.titulo{
+  padding-bottom: 2%;
 }

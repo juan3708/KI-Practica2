@@ -1,0 +1,24 @@
+<!-- News-->
+<section class="page-section bg-dark text-white">
+    <div class="container px-1 px-lg-1">
+        <h2 class="mb-4">Noticias</h2>
+    </div>
+</section>
+<section>
+    <div class="d-flex justify-content-right container mt-5">
+        <div class="margin" *ngFor="let categoria of categorias">
+            <a class="themeBtn" (click)="findNewsByCategory(categoria.id)">{{categoria.nombre}}</a>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="d-flex justify-content-center container mt-5">
+        <figure class="snip1527" *ngFor="let noticia of noticias">
+            <div class="image"><img src="https://i.imgur.com/sSuJsu8.jpg" alt="pr-sample23" /></div>
+            <figcaption>
+                <h3>{{noticia.titulo | slice:0:25}}...</h3>
+                <p>{{noticia.cuerpo}}</p>
+            </figcaption> <a href="#"></a>
+        </figure>
+    </div>
+</section>
