@@ -1,6 +1,7 @@
 import Noticia from "../models/noticia";
 import Categoria from "../models/categoria";
 
+
 export async function crearNoticia (req, res){
     const {titulo, cuerpo, estado, img, categoria_id} =req.body;
     try{
@@ -96,10 +97,13 @@ export async function editarNoticia (req, res){
     }
 }
 
+//FALTAN VALIDACIONES EN BUSCAR POR CATEGORIA Y POR ESTADO.
+
 export async function BuscarNoticiasPorCategoria(req, res) {
     const {id} = req.body;
-    let Noticias = await Noticia.findAll({
-        where: {categoria_id: id },
+    try{
+    let noticias = await Noticia.findAll({
+        where: {categoria_id: id},
         include: [{
             model: Categoria,
             attributes: ['nombre']
@@ -108,26 +112,115 @@ export async function BuscarNoticiasPorCategoria(req, res) {
             'cuerpo',
             'estado', 
             'img']
-    });
-    res.json({
-        code: 200,
-        message: 'Se ha listado correctamente',
-        data: Noticias
-    });
+        });
+        if(noticias){
+            res.json({
+                code: 200,
+                message: 'Noticias listadas correctamente',
+                data: noticias
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'No existe la categoría',
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'Error',
+
+        });
+    }
 }
 
 export async function BuscarNoticiasPorEstado(req, res) {
     const {estado} = req.body;
-    let Noticias = await Noticia.findAll({
-        where: {estado:estado},
-        attributes: ['id','titulo',
-            'cuerpo',
-            'estado', 
-            'img']
-    });
-    res.json({
-        code: 200,
-        message: 'Se ha listado correctamente',
-        data: Noticias
-    });
+    try{
+        let noticias = await Noticia.findAll({
+            where: {estado:estado},
+            attributes: ['id','titulo',
+                'cuerpo',
+                'estado', 
+                'img']
+        });
+        if(noticias){
+            res.json({
+                code:200,
+                message: 'Las noticias han sido encontradas con exito',
+                data : noticias
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'La noticia no existe'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarNoticiaPorTitulo(req, res) {
+    const {titulo} = req.body;
+    try{
+        let noticia = await Noticia.findOne({
+            where: {titulo:titulo},
+            attributes: ['id','titulo',
+                'cuerpo',
+                'estado', 
+                'img']
+        });
+        if(noticia){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado la noticia',
+                data: noticia
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'La noticia no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarNoticiaPorId (req, res) {
+    const { id } = req.body;
+    try {
+        let noticia = await Noticia.findOne({
+            where: { id: id },
+            attributes: ['id','titulo',
+                'cuerpo',
+                'estado', 
+                'img']
+            
+        });
+        if (noticia) {
+            res.json({
+                code: 200,
+                message: 'La noticia ha sido encontrada con exito',
+                data: noticia
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'La noticia no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
 }
