@@ -1,4 +1,4 @@
-import {Sequelize} from 'sequelize';
+import {DataTypes, Sequelize} from 'sequelize';
 import {sequelize} from '../database/db';
 import Aviso from '../models/aviso';
 
@@ -17,6 +17,7 @@ const Postulante = sequelize.define('postulante' ,{
         allowNull:false
     },
     correo: {
+      
         type: Sequelize.STRING,
         allowNull:false,
         validate:{
@@ -44,6 +45,10 @@ const Postulante = sequelize.define('postulante' ,{
         type:Sequelize.STRING,
         allowNull:false 
     },
+    operativo: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
     aviso_id: {
         type: Sequelize.INTEGER,
         references: {
@@ -51,7 +56,7 @@ const Postulante = sequelize.define('postulante' ,{
             key: 'id'
         },
         allowNull: false
-    }
+    },
 },{
     timestamps: false,
     tableName: 'postulante'
