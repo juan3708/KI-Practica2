@@ -97,7 +97,98 @@ export async function editarNoticia (req, res){
     }
 }
 
+export async function BuscarNoticiaPorId (req, res) {
+    const { id } = req.body;
+    try {
+        let noticia = await Noticia.findOne({
+            where: { id: id },
+            attributes: ['id','titulo',
+                'cuerpo',
+                'estado', 
+                'img']
+            
+        });
+        if (noticia) {
+            res.json({
+                code: 200,
+                message: 'La noticia ha sido encontrada con exito',
+                data: noticia
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'La noticia no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarNoticiaPorTitulo(req, res) {
+    const {titulo} = req.body;
+    try{
+        let noticia = await Noticia.findOne({
+            where: {titulo:titulo},
+            attributes: ['id','titulo',
+                'cuerpo',
+                'estado', 
+                'img']
+        });
+        if(noticia){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado la noticia',
+                data: noticia
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'La noticia no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
 //FALTAN VALIDACIONES EN BUSCAR POR CATEGORIA Y POR ESTADO.
+
+export async function BuscarNoticiasPorEstado(req, res) {
+    const {estado} = req.body;
+    try{
+        let noticias = await Noticia.findAll({
+            where: {estado:estado},
+            attributes: ['id','titulo',
+                'cuerpo',
+                'estado', 
+                'img']
+        });
+        if(noticias){
+            res.json({
+                code:200,
+                message: 'Las noticias han sido encontradas con exito',
+                data : noticias
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'La noticia no existe'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
 
 export async function BuscarNoticiasPorCategoria(req, res) {
     const {id} = req.body;
@@ -134,93 +225,7 @@ export async function BuscarNoticiasPorCategoria(req, res) {
     }
 }
 
-export async function BuscarNoticiasPorEstado(req, res) {
-    const {estado} = req.body;
-    try{
-        let noticias = await Noticia.findAll({
-            where: {estado:estado},
-            attributes: ['id','titulo',
-                'cuerpo',
-                'estado', 
-                'img']
-        });
-        if(noticias){
-            res.json({
-                code:200,
-                message: 'Las noticias han sido encontradas con exito',
-                data : noticias
-            });
-        }else{
-            res.json({
-                code:400,
-                message: 'La noticia no existe'
-            });
-        }
-    }catch(e){
-        res.json({
-            code:401,
-            message: 'ERROR'
-        });
-    }
-}
 
-export async function BuscarNoticiaPorTitulo(req, res) {
-    const {titulo} = req.body;
-    try{
-        let noticia = await Noticia.findOne({
-            where: {titulo:titulo},
-            attributes: ['id','titulo',
-                'cuerpo',
-                'estado', 
-                'img']
-        });
-        if(noticia){
-            res.json({
-                code: 200,
-                message: 'Se ha encontrado la noticia',
-                data: noticia
-            });
-        } else {
-            res.json({
-                code: 400,
-                message: 'La noticia no existe'
-            });
-        }
-    } catch (e) {
-        res.json({
-            code: 401,
-            message: 'ERROR'
-        });
-    }
-}
 
-export async function BuscarNoticiaPorId (req, res) {
-    const { id } = req.body;
-    try {
-        let noticia = await Noticia.findOne({
-            where: { id: id },
-            attributes: ['id','titulo',
-                'cuerpo',
-                'estado', 
-                'img']
-            
-        });
-        if (noticia) {
-            res.json({
-                code: 200,
-                message: 'La noticia ha sido encontrada con exito',
-                data: noticia
-            });
-        } else {
-            res.json({
-                code: 400,
-                message: 'La noticia no existe'
-            });
-        }
-    } catch (e) {
-        res.json({
-            code: 401,
-            message: 'ERROR'
-        });
-    }
-}
+
+
