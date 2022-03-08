@@ -108,3 +108,87 @@ export async function eliminarTecnologia (req, res){
         });
     }
 }
+
+export async function BuscarTecnologiaPorId(req, res) {
+    const {id} = req.body;
+    try{
+        let tecnologia = await Tecnologia.findOne({
+            where: {id:id},
+            attributes: ['id', 'nombre' 
+            ]
+        });
+        if(tecnologia){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado la tecnologia',
+                data: tecnologia
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'La tecnologia con ese id no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarTecnologiaPorNombre(req, res) {
+    const {nombre} = req.body;
+    try{
+        let tecnologia = await Tecnologia.findOne({
+            where: {nombre:nombre},
+            attributes: ['id', 'nombre' 
+            ]
+        });
+        if(tecnologia){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado la tecnologia',
+                data: tecnologia
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'La tecnologia con ese nombre no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+//FALTA VALIDACIÓN
+export async function BuscarTecnologiaPorOperatividad(req, res) {
+    const {operativo} = req.body;
+    try{
+        let tecnologias = await Tecnologia.findAll({
+            where: {operativo:operativo},
+            attributes: ['id','nombre','operativo']
+        });
+        if(tecnologias){
+            res.json({
+                code:200,
+                message: 'Las tecnologias han sido encontradas con exito',
+                data : tecnologias
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'Las tecnologias no existen'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
