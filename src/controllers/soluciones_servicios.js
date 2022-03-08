@@ -127,3 +127,30 @@ export async function eliminarSoluciones_servicios (req, res){
         });
     }
 }
+
+export async function BuscarPorTag(req, res) {
+    const {tag} = req.body;
+    try{
+        let soluciones_servicios = await Soluciones_servicios.findAll({
+            where: {tag:tag},
+            attributes: ['id', 'tipo', 'nombre_seccion', 'tag', 'icono', 'titulo','descripcion','operativo']
+        });
+        if(soluciones_servicios){
+            res.json({
+                code:200,
+                message: 'Se ha listado por tag',
+                data : soluciones_servicios
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'El tag no existe'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
