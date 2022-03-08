@@ -110,3 +110,87 @@ export async function eliminarCargo (req, res){
         });
     }
 }
+
+export async function BuscarCargoPorId(req, res) {
+    const {id} = req.body;
+    try{
+        let cargo = await Cargo.findOne({
+            where: {id:id},
+            attributes: ['id', 'nombre', 'operativo' 
+            ]
+        });
+        if(cargo){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado el cargo',
+                data: cargo
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'El cargo con ese id no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarCargoPorNombre(req, res) {
+    const {nombre} = req.body;
+    try{
+        let cargo = await Cargo.findOne({
+            where: {nombre:nombre},
+            attributes: ['id', 'nombre', 'operativo' 
+            ]
+        });
+        if(cargo){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado el cargo',
+                data: cargo
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'El cargo con ese nombre no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+//FALTA VALIDACIÓN
+export async function BuscarCargoPorOperatividad(req, res) {
+    const {operativo} = req.body;
+    try{
+        let cargos = await Cargo.findAll({
+            where: {operativo:operativo},
+            attributes: ['id','nombre','operativo']
+        });
+        if(cargos){
+            res.json({
+                code:200,
+                message: 'Los cargos han sido encontrados con exito',
+                data : cargos
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'Los cargos no existen'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
