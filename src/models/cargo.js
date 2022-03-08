@@ -30,7 +30,7 @@ Cargo.hasMany(Aviso,{
     sourceKey: 'id'
 })
 Aviso.belongsTo (Cargo, {
-    foreignKet: {
+    foreignKey: {
         name: 'cargo_id',
     },
     sourceKey: 'id'
