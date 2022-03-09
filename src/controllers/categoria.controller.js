@@ -167,7 +167,6 @@ export async function BuscarCategoriaPorNombre(req, res) {
     }
 }
 
-//FALTA VALIDACIÓN
 export async function BuscarCategoriaPorOperatividad(req, res) {
     const {operativo} = req.body;
     try{
@@ -175,7 +174,7 @@ export async function BuscarCategoriaPorOperatividad(req, res) {
             where: {operativo:operativo},
             attributes: ['id','nombre','operativo']
         });
-        if(categorias){
+        if(categorias.length>0){
             res.json({
                 code:200,
                 message: 'Las categorias han sido encontradas con exito',
