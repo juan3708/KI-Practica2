@@ -167,7 +167,6 @@ export async function BuscarCargoPorNombre(req, res) {
     }
 }
 
-//FALTA VALIDACIÓN
 export async function BuscarCargoPorOperatividad(req, res) {
     const {operativo} = req.body;
     try{
@@ -175,7 +174,7 @@ export async function BuscarCargoPorOperatividad(req, res) {
             where: {operativo:operativo},
             attributes: ['id','nombre','operativo']
         });
-        if(cargos){
+        if(cargos.length>0){
             res.json({
                 code:200,
                 message: 'Los cargos han sido encontrados con exito',
