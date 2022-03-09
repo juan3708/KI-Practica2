@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { BuscarBitacoraPorAccion, BuscarBitacoraPorFecha, BuscarBitacoraPorId, BuscarBitacoraPorTabla, crearBitacora, editarBitacora, listarBitacoras} from "../controllers/bitacora.controller";
+import { BuscarBitacoraPorAccion, BuscarBitacoraPorFecha, BuscarBitacoraPorId, BuscarBitacoraPorIdTabla, BuscarBitacoraPorTabla, crearBitacora, editarBitacora, listarBitacoras} from "../controllers/bitacora.controller";
 
 const router = Router();
 
@@ -10,6 +10,6 @@ router.get('/buscar/id', BuscarBitacoraPorId);
 router.get('/buscar/fecha', BuscarBitacoraPorFecha);
 router.get('/buscar/tabla', BuscarBitacoraPorTabla);
 router.get('/buscar/accion', BuscarBitacoraPorAccion);
-
+router.get('/buscar/idTabla', BuscarBitacoraPorIdTabla);
 
 export default router;
