@@ -170,7 +170,7 @@ export async function BuscarNoticiasPorEstado(req, res) {
                 'estado', 
                 'img']
         });
-        if(noticias){
+        if(noticias.length>0){
             res.json({
                 code:200,
                 message: 'Las noticias han sido encontradas con exito',
@@ -191,10 +191,10 @@ export async function BuscarNoticiasPorEstado(req, res) {
 }
 
 export async function BuscarNoticiasPorCategoria(req, res) {
-    const {id} = req.body;
+    const {categoria_id} = req.body;
     try{
     let noticias = await Noticia.findAll({
-        where: {categoria_id: id},
+        where: {categoria_id: categoria_id},
         include: [{
             model: Categoria,
             attributes: ['nombre']
@@ -204,7 +204,7 @@ export async function BuscarNoticiasPorCategoria(req, res) {
             'estado', 
             'img']
         });
-        if(noticias){
+        if(noticias.length>0){
             res.json({
                 code: 200,
                 message: 'Noticias listadas correctamente',
