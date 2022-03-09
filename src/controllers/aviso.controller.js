@@ -131,7 +131,6 @@ export async function BuscarAvisoPorId(req, res) {
     }
 }
 
-//FALTA VALIDACIÓN 
 export async function BuscarAvisoPorTitulo(req, res) {
     const {titulo} = req.body;
     try{
@@ -175,7 +174,7 @@ export async function BuscarAvisosPorEstado(req, res) {
                 'rango_final',
                 'estado']
         });
-        if(avisos){
+        if(avisos.length>0){
             res.json({
                 code:200,
                 message: 'Los avisos han sido encontrados con exito',
@@ -196,10 +195,10 @@ export async function BuscarAvisosPorEstado(req, res) {
 }
 
 export async function BuscarAvisoPorCargo(req, res) {
-    const {id} = req.body;
+    const {cargo_id} = req.body;
     try{
     let avisos = await Aviso.findAll({
-        where: {cargo_id:id},
+        where: {cargo_id:cargo_id},
         include: [{
             model: Cargo,
             attributes: ['nombre']
@@ -210,10 +209,10 @@ export async function BuscarAvisoPorCargo(req, res) {
         'rango_final',
         'estado']
         });
-        if(avisos){
+        if(avisos.length>0){
             res.json({
                 code: 200,
-                message: 'Avisos listadas correctamente',
+                message: 'Avisos listados correctamente',
                 data: avisos
             });
         } else {
