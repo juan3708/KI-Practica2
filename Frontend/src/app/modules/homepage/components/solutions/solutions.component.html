@@ -5,12 +5,14 @@
     <div class="container mx-auto mt-4">
       <div class="row">
         <div class="col-md-4" *ngFor="let solucion of soluciones">
-          <div class="card" style="width: 24rem;">
-            <img src="../../../../../assets/img/solutions/web.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{solucion.titulo}}</h5>
-              <p class="card-text">{{solucion.descripcion}}</p>
-              <a href="#contacts" class="btn mr-2"><i class="fas fa-link"></i>CONTÁCTANOS</a>
+          <div class="change">
+            <div class="card" style="width: 24rem; height: 430px;">
+              <img src="../../../../../assets/img/solutions/web.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{solucion.titulo}}</h5>
+                <p class="card-text">{{solucion.descripcion}}</p>
+                <a href="#contacts" class="btn mr-2"><i class="fas fa-link"></i>CONTÁCTANOS</a>
+              </div>
             </div>
           </div>
         </div>

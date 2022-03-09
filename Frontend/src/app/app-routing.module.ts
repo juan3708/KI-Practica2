@@ -5,22 +5,27 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-        import('./modules/homepage/homepage-routing.module').then(m => m.HomepageRoutingModule),
+      import('./modules/homepage/homepage-routing.module').then((m) => m.HomepageRoutingModule),
   },
   {
     path: 'about',
     loadChildren: () =>
-        import('./modules/about/about-routing.module').then(m => m.AboutRoutingModule),
+      import('./modules/about/about-routing.module').then((m) => m.AboutRoutingModule),
   },
   {
     path: 'news',
     loadChildren: () =>
-        import('./modules/news/news-routing.module').then(m => m.NewsRoutingModule),
-  }
+      import('./modules/news/news-routing.module').then((m) => m.NewsRoutingModule),
+  },
+  {
+    path: 'jobs',
+    loadChildren: () =>
+      import('./modules/job-notices/job-notices-routing.module').then((m) => m.JobNoticesRoutingModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

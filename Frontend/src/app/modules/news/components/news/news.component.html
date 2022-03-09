@@ -6,19 +6,26 @@
 </section>
 <section>
     <div class="d-flex justify-content-right container mt-5">
-        <div class="margin" *ngFor="let categoria of categorias">
-            <a class="themeBtn" (click)="findNewsByCategory(categoria.id)">{{categoria.nombre}}</a>
+        <div class="margin">
+            <a class="themeBtn" (click)="listAllNews()">Todas</a>
+            <a class="themeBtn" *ngFor="let categoria of categorias"
+                (click)="findNewsByCategory(categoria.id)">{{categoria.nombre}}</a>
         </div>
     </div>
 </section>
 <section>
-    <div class="d-flex justify-content-center container mt-5">
-        <figure class="snip1527" *ngFor="let noticia of noticias">
-            <div class="image"><img src="https://i.imgur.com/sSuJsu8.jpg" alt="pr-sample23" /></div>
-            <figcaption>
-                <h3>{{noticia.titulo | slice:0:25}}...</h3>
-                <p>{{noticia.cuerpo}}</p>
-            </figcaption> <a href="#"></a>
-        </figure>
+    <div class="container mx-auto mt-4">
+        <div class="row">
+            <div class="col">
+                <figure class="snip1527" *ngFor="let noticia of noticias">
+                    <div class="image"><img src="https://i.imgur.com/sSuJsu8.jpg" alt="pr-sample23" /></div>
+                    <figcaption>
+                        <h3>{{noticia.titulo | slice:0:25}}...</h3>
+                        <p>{{noticia.cuerpo | slice:0:150}}...</p>
+                    </figcaption> <a (click)="onSelectNews(noticia)"></a>
+                </figure>
+            </div>
+        </div>
     </div>
+
 </section>

@@ -5,10 +5,14 @@ import { AboutModule } from './modules/about/about.module';
 import { AppRoutingModule } from './app-routing.module';
 import { NewsModule } from './modules/news/news.module';
 import { HomepageModule } from './modules/homepage/homepage.module';
+import { JobNoticesModule } from './modules/job-notices/job-notices.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
+
+
 
 
 
@@ -25,7 +29,9 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
     HttpClientModule,
     AboutModule,
     HomepageModule,
-    NewsModule
+    NewsModule,
+    JobNoticesModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

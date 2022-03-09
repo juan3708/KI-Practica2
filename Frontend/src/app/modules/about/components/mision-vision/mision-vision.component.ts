@@ -13,7 +13,7 @@ export class MisionVisionComponent implements OnInit {
 
   //cada vez que se crea ESE componente se inicializa todo lo que esta dentro del ngOnInit.
   ngOnInit(): void {
-    this.aboutServices.getMisionVision().subscribe((resp: any)=>{
+    this.aboutServices.getTextos().subscribe((resp: any)=>{
       console.log(resp);
       this.mision = resp.textos.find(mision => mision.tag === 'tag_mision');
       console.log(this.mision);
