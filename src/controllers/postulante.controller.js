@@ -183,6 +183,84 @@ export async function BuscarPostulantePorId (req, res) {
     }
 }
 
+export async function BuscarPostulantePorNombre(req, res) {
+    const {nombre} = req.body;
+    try{
+        let postulantes = await Postulante.findAll({
+            where: {nombre:nombre},
+            include:[{
+                model: Aviso,
+                attributes: ['id']
+            }],
+            attributes: ['id',
+                'nombre',
+                'apellido', 
+                'correo', 
+                'telefono',
+                'direccion',
+                'anios_de_experiencia',
+                'cv', 
+                'operativo']
+        });
+        if(postulantes.length>0){
+            res.json({
+                code:200,
+                message: 'Los postulantes han sido encontrados con exito',
+                data : postulantes
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'No existen postulantes con ese nombre'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarPostulantePorApellido(req, res) {
+    const {apellido} = req.body;
+    try{
+        let postulantes = await Postulante.findAll({
+            where: {apellido:apellido},
+            include:[{
+                model: Aviso,
+                attributes: ['id']
+            }],
+            attributes: ['id',
+                'nombre',
+                'apellido', 
+                'correo', 
+                'telefono',
+                'direccion',
+                'anios_de_experiencia',
+                'cv', 
+                'operativo']
+        });
+        if(postulantes.length>0){
+            res.json({
+                code:200,
+                message: 'Los postulantes han sido encontrados con exito',
+                data : postulantes
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'No existen postulantes con ese apellido'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
+
 export async function BuscarPostulantePorCorreo (req, res) {
     const {correo} = req.body;
     try {
@@ -221,3 +299,83 @@ export async function BuscarPostulantePorCorreo (req, res) {
         });
     }
 }
+
+export async function BuscarPostulantePorExperiencia(req, res) {
+    const {anios_de_experiencia} = req.body;
+    try{
+        let postulantes = await Postulante.findAll({
+            where: {anios_de_experiencia:anios_de_experiencia},
+            include:[{
+                model: Aviso,
+                attributes: ['id']
+            }],
+            attributes: ['id',
+                'nombre',
+                'apellido', 
+                'correo', 
+                'telefono',
+                'direccion',
+                'anios_de_experiencia',
+                'cv', 
+                'operativo']
+        });
+        if(postulantes.length>0){
+            res.json({
+                code:200,
+                message: 'Los postulantes han sido encontrados con exito',
+                data : postulantes
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'No existen postulantes con esos años de experiencia'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarPostulantePorOperatividad(req, res) {
+    const {operativo} = req.body;
+    try{
+        let postulantes = await Postulante.findAll({
+            where: {operativo:operativo},
+            include:[{
+                model: Aviso,
+                attributes: ['id']
+            }],
+            attributes: ['id',
+            'nombre',
+            'apellido', 
+            'correo', 
+            'telefono',
+            'direccion',
+            'anios_de_experiencia',
+            'cv', 
+            'operativo']
+        });
+        if(postulantes.length>0){
+            res.json({
+                code:200,
+                message: 'Los postulantes han sido encontrados con exito',
+                data : postulantes
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'Los postulantes no existen'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
+
+
