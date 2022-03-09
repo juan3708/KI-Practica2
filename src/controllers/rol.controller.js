@@ -109,3 +109,84 @@ export async function eliminarRol (req, res){
         });
     }
 }
+
+export async function BuscarRolPorId(req, res) {
+    const {id} = req.body;
+    try{
+        let rol = await Rol.findOne({
+            where: {id:id},
+            attributes: ['id', 'nombre', 'operativo']
+        });
+        if(rol){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado el rol',
+                data: rol
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'El rol con ese id no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarRolPorNombre(req, res) {
+    const {nombre} = req.body;
+    try{
+        let rol = await Rol.findOne({
+            where: {nombre:nombre},
+            attributes: ['id', 'nombre', 'operativo']
+        });
+        if(rol){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado el rol',
+                data: rol
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'El rol con ese nombre no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarRolPorOperatividad(req, res) {
+    const {operativo} = req.body;
+    try{
+        let roles = await Rol.findAll({
+            where: {operativo:operativo},
+            attributes: ['id','nombre','operativo']
+        });
+        if(roles.length>0){
+            res.json({
+                code:200,
+                message: 'Los roles han sido encontrados con exito',
+                data : roles
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'Los roles no existen'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}

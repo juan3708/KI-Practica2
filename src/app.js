@@ -7,6 +7,10 @@ import tecnologiaRoutes from '../src/routes/tecnologia';
 import textoRoutes from '../src/routes/texto';
 import soluciones_serviciosRoutes from '../src/routes/soluciones_servicios';
 import noticiaRoutes from '../src/routes/noticia';
+import avisoRoutes from '../src/routes/aviso';
+import postulanteRoutes from '../src/routes/postulante';
+import bitacoraRoutes from '../src/routes/bitacora';
+
 
 const app = express();
 
@@ -33,5 +37,8 @@ app.use('/api/tecnologia', tecnologiaRoutes);
 app.use('/api/texto', textoRoutes);
 app.use('/api/soluciones_servicios', soluciones_serviciosRoutes);
 app.use('/api/noticia', noticiaRoutes);
+app.use('/api/aviso', avisoRoutes);
+app.use('/api/postulante', postulanteRoutes);
+app.use('/api/bitacora', bitacoraRoutes);
 
 export default app;
