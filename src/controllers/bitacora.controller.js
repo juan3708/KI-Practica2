@@ -119,7 +119,6 @@ export async function BuscarBitacoraPorId(req, res) {
     }
 }
 
-//FALTA CORREGIR LA VALIDACIÓN
 
 export async function BuscarBitacoraPorTabla(req, res) {
     const {tabla_referencia} = req.body;
@@ -131,7 +130,7 @@ export async function BuscarBitacoraPorTabla(req, res) {
             'fecha',
             'id_tabla_referencia']
         });
-        if(bitacoras){
+        if(bitacoras.length>0){
             res.json({
                 code:200,
                 message: 'Las bitacoras han sido encontradas con exito',
@@ -161,7 +160,7 @@ export async function BuscarBitacoraPorAccion (req, res) {
             'fecha',
             'id_tabla_referencia']
         });
-        if(bitacoras){
+        if(bitacoras.length>0){
             res.json({
                 code:200,
                 message: 'Las bitacoras han sido encontradas con exito',
@@ -191,7 +190,37 @@ export async function BuscarBitacoraPorFecha(req, res) {
             'fecha',
             'id_tabla_referencia']
         });
-        if(bitacoras){
+        if(bitacoras.length>0){
+            res.json({
+                code:200,
+                message: 'Las bitacoras han sido encontradas con exito',
+                data : bitacoras
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'La bitacora no existe'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarBitacoraPorIdTabla(req, res) {
+    const {id_tabla_referencia} = req.body;
+    try{
+        let bitacoras = await Bitacora.findAll({
+            where: {id_tabla_referencia :id_tabla_referencia},
+            attributes: ['id', 'tabla_referencia',
+            'accion',
+            'fecha',
+            'id_tabla_referencia']
+        });
+        if(bitacoras.length>0){
             res.json({
                 code:200,
                 message: 'Las bitacoras han sido encontradas con exito',
