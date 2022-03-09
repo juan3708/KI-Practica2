@@ -128,6 +128,93 @@ export async function eliminarSoluciones_servicios (req, res){
     }
 }
 
+export async function BuscarPorId(req, res) {
+    const {id} = req.body;
+    try{
+        let soluciones_servicios = await Soluciones_servicios.findOne({
+            where: {id:id},
+            attributes: ['id', 'tipo',
+            'nombre_seccion',
+            'tag',
+            'icono',
+            'titulo', 
+            'descripcion',
+            'operativo']
+        });
+        if(soluciones_servicios){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado la información',
+                data: soluciones_servicios
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'La información con ese id no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarPorTipo(req, res) {
+    const {tipo} = req.body;
+    try{
+        let soluciones_servicios = await Soluciones_servicios.findAll({
+            where: {tipo:tipo},
+            attributes: ['id', 'tipo', 'nombre_seccion', 'tag', 'icono', 'titulo','descripcion','operativo']
+        });
+        if(soluciones_servicios.length>0){
+            res.json({
+                code:200,
+                message: 'Se ha listado por tipo',
+                data : soluciones_servicios
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'El tipo no existe'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarPorNombre(req, res) {
+    const {nombre_seccion} = req.body;
+    try{
+        let soluciones_servicios = await Soluciones_servicios.findAll({
+            where: {nombre_seccion:nombre_seccion},
+            attributes: ['id', 'tipo', 'nombre_seccion', 'tag', 'icono', 'titulo','descripcion','operativo']
+        });
+        if(soluciones_servicios.length>0){
+            res.json({
+                code:200,
+                message: 'Se ha listado por el nombre',
+                data : soluciones_servicios
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'El nombre no existe'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
+
 export async function BuscarPorTag(req, res) {
     const {tag} = req.body;
     try{
@@ -135,7 +222,7 @@ export async function BuscarPorTag(req, res) {
             where: {tag:tag},
             attributes: ['id', 'tipo', 'nombre_seccion', 'tag', 'icono', 'titulo','descripcion','operativo']
         });
-        if(soluciones_servicios){
+        if(soluciones_servicios.length>0){
             res.json({
                 code:200,
                 message: 'Se ha listado por tag',
@@ -145,6 +232,66 @@ export async function BuscarPorTag(req, res) {
             res.json({
                 code:400,
                 message: 'El tag no existe'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarPorTitulo(req, res) {
+    const {titulo} = req.body;
+    try{
+        let soluciones_servicios = await Soluciones_servicios.findOne({
+            where: {titulo:titulo},
+            attributes: ['id', 'tipo',
+            'nombre_seccion',
+            'tag',
+            'icono',
+            'titulo', 
+            'descripcion',
+            'operativo']
+        });
+        if(soluciones_servicios){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado la información',
+                data: soluciones_servicios
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'La información con ese titulo no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarPorOperatividad(req, res) {
+    const {operativo} = req.body;
+    try{
+        let soluciones_servicios = await Soluciones_servicios.findAll({
+            where: {operativo:operativo},
+            attributes: ['id', 'tipo', 'nombre_seccion', 'tag', 'icono', 'titulo','descripcion','operativo']
+        });
+        if(soluciones_servicios.length>0){
+            res.json({
+                code:200,
+                message: 'La información ha sido encontrada con exito',
+                data : soluciones_servicios
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'La información no existe'
             });
         }
     }catch(e){
