@@ -165,7 +165,6 @@ export async function BuscarTecnologiaPorNombre(req, res) {
     }
 }
 
-//FALTA VALIDACIÓN
 export async function BuscarTecnologiaPorOperatividad(req, res) {
     const {operativo} = req.body;
     try{
@@ -173,7 +172,7 @@ export async function BuscarTecnologiaPorOperatividad(req, res) {
             where: {operativo:operativo},
             attributes: ['id','nombre','operativo']
         });
-        if(tecnologias){
+        if(tecnologias.length>0){
             res.json({
                 code:200,
                 message: 'Las tecnologias han sido encontradas con exito',
