@@ -164,7 +164,6 @@ export async function BuscarRolPorNombre(req, res) {
     }
 }
 
-//FALTA VALIDACIÓN
 export async function BuscarRolPorOperatividad(req, res) {
     const {operativo} = req.body;
     try{
@@ -172,7 +171,7 @@ export async function BuscarRolPorOperatividad(req, res) {
             where: {operativo:operativo},
             attributes: ['id','nombre','operativo']
         });
-        if(roles){
+        if(roles.length>0){
             res.json({
                 code:200,
                 message: 'Los roles han sido encontrados con exito',
