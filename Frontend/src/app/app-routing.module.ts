@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+//distintas rutas de la página
 const routes: Routes = [
   {
     path: '',
@@ -22,6 +23,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/job-notices/job-notices-routing.module').then((m) => m.JobNoticesRoutingModule),
   },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./modules/login/login-routing.module').then((m) => m.LoginRoutingModule),
+  }
 ];
 
 @NgModule({

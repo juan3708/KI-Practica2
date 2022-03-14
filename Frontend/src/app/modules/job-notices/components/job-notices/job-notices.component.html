@@ -1,4 +1,4 @@
-<!-- News-->
+<!-- Avisos de trabajo-->
 <section class="page-section bg-dark text-white">
     <div class="container px-1 px-lg-1">
         <h2 class="mb-4">Avisos de trabajo</h2>
@@ -23,18 +23,25 @@
                 <p class="heading">{{aviso.titulo}}&nbsp;<i class="far fa-compass"></i></p>
                 <hr class="divider">
             </div>
+            <div class="card-title">
+                <p class="heading">{{aviso.cargo.nombre | titlecase}} &nbsp;<i class="far fa-compass"></i></p>
+            </div>
+            <hr class="divider">
             <p class="text-muted">{{aviso.funciones}}</p>
+            <hr class="divider">
+            <p class="text-center">Tecnologías</p>
+            <hr class="divider">
             <div class="row btnrow my-4">
                 <div class="salary"><i class="fas fa-users"></i>&nbsp;&nbsp;<p>Sueldo líquido:
                         <button type="button" class="btn btn-outline-success btn-sm"
-                            style="background: #00ff002b;">${{aviso.rango_inicial}} - ${{aviso.rango_final}}</button>
+                            style="background: #00ff002b;" disabled>${{aviso.rango_inicial}} - ${{aviso.rango_final}}</button>
                     </p>
                 </div>
             </div>
             <div class="row btnsubmit mt-4">
                 <div class="col-md-6 col-6">
                     <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop"><span>Llenar
+                        data-bs-target="#staticBackdrop" (click)="setNoticeId(aviso.id)"><span>Llenar
                             formulario</span></button>
                 </div>
             </div>
@@ -42,51 +49,51 @@
     </div>
 </section>
 
-<!-- Modal -->
+<!-- Modal Formulario postulación-->
 <div class="modal modal-fade modal-fade-centered" id="staticBackdrop" data-bs-backdrop="true" data-bs-keyboard="false"
     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Formulario de Postulación</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button #closeModal type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="modalClose"></button>
             </div>
             <div class="modal-body">
                 <div class="container">
                     <h6>Nombre</h6>
                     <div class="form">
                         <input type="text" placeholder="Ingrese su nombre" class="form-control" id="floatingInputNombre"
-                            #Nombre>
+                            #nombre>
                     </div>
                     <br>
                     <h6>Apellido</h6>
                     <div class="form">
                         <input type="text" placeholder="Ingrese su apellido" class="form-control" id="floatingApellido"
-                            #Apellido>
+                            #apellido>
                     </div>
                     <br>
                     <h6>Correo</h6>
                     <div class="form">
                         <input type="email" placeholder="Ingrese su correo: correo@example.com" class="form-control"
-                            id="floatingCorreo" #Correo>
+                            id="floatingCorreo" #correo>
                     </div>
                     <br>
                     <h6>Teléfono</h6>
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon1">+569</span>
-                        <input type="text" class="form-control" placeholder="Ingrese su número de teléfono" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" placeholder="Ingrese su número de teléfono" aria-label="Username" aria-describedby="basic-addon1" id="floatingTelefono" #telefono>
                     </div>
                     <br>
                     <h6>Dirección</h6>
                     <div class="form">
                         <input type="text" placeholder="Ingrese su dirección" class="form-control"
-                            id="floatingDireccion" #Direccion>
+                            id="floatingDireccion" #direccion>
                     </div>
                     <br>
                     <h6>Años de experiencia</h6>
                     <div class="form">
                         <input type="number" placeholder="Años de experiencia" class="form-control"
-                            id="floatingDireccion" #Direccion>
+                            id="floatingDireccion" #anioExperiencia>
                     </div>
                     <br>
                     <h6>Curriculum</h6>
@@ -97,7 +104,7 @@
                 <br>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Enviar formulario</button>
+                    <button type="button" class="btn btn-primary" (click)="forms(nombre.value, apellido.value, correo.value, telefono.value, direccion.value, anioExperiencia.value)">Enviar formulario</button>
                 </div>
             </div>
         </div>

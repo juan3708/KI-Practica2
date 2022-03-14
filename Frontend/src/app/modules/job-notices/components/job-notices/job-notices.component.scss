@@ -1,9 +1,9 @@
 .page-section{
-    padding: 1%;
+    padding-bottom: 1%;
 }
 
 .container{
-    padding-top: 2%;
+    padding-top: 1%;
 }
 
 body {
@@ -108,9 +108,10 @@ p.text-muted {
 
 .divider{
     background-color: #ff9900;
-    max-width: 10rem;
+    max-width: 20rem;
     margin: 1.5rem auto;
     opacity: 1;
+    height: 2px;
 }
 
 .card-title{
