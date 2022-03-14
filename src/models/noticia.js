@@ -1,40 +1,46 @@
 import {DataTypes, Sequelize} from 'sequelize';
 import {sequelize} from '../database/db';
+import Categoria from './categoria';
 import Usuario from './usuario';
 
-const Texto = sequelize.define('texto' ,{
+
+const Noticia = sequelize.define('noticia' ,{
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    nombre_seccion: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    tag: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
     titulo: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    descripcion: {
+    cuerpo: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    operativo: {
-        type: DataTypes.BOOLEAN,
+    estado: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    img: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    categoria_id: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: Categoria,
+            key: 'id'
+        },
         allowNull: false
     }
 },{
     timestamps: false,
-    tableName: 'texto'
+    tableName: 'noticia'
 });
 
-//Definicion relacion usuario
-Texto.belongsToMany (Usuario,{through: "texto_has_usuario"});
-Usuario.belongsToMany(Texto,{through: "texto_has_usuario"});
+//Definicion relacion con usuario
+Noticia.belongsToMany (Usuario, {through: "usuario_has_noticia"});
+Usuario.belongsToMany(Noticia, {through: "usuario_has_noticia"});
 
-export default Texto;
+export default Noticia;

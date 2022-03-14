@@ -1,28 +1,36 @@
 import {DataTypes, Sequelize} from 'sequelize';
 import {sequelize} from '../database/db';
-import Usuario from './usuario';
 
-const Texto = sequelize.define('texto' ,{
+
+
+const Usuario = sequelize.define('usuario',{
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement:true
     },
-    nombre_seccion: {
+    nombre: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    tag: {
+    apellido: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    titulo: {
+    correo: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull:false,
+        validate:{
+            notNull:{
+                message: 'Ingresa un correo'
+            },
+            isEmail: {
+                message: 'Ingresa un correo valido'}
+        }
     },
-    descripcion: {
+    password: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull:false
     },
     operativo: {
         type: DataTypes.BOOLEAN,
@@ -30,11 +38,8 @@ const Texto = sequelize.define('texto' ,{
     }
 },{
     timestamps: false,
-    tableName: 'texto'
+    tableName: 'usuario'
 });
 
-//Definicion relacion usuario
-Texto.belongsToMany (Usuario,{through: "texto_has_usuario"});
-Usuario.belongsToMany(Texto,{through: "texto_has_usuario"});
 
-export default Texto;
+export default Usuario;

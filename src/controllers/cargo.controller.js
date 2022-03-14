@@ -1,10 +1,11 @@
 import Cargo from "../models/cargo";
 
 export async function crearCargo(req,res){
-    const {nombre} = req.body;
+    const {nombre, operativo} = req.body;
     try{
         let nuevoCargo = await Cargo.create({
-            nombre
+            nombre,
+            operativo
         })
         if(nuevoCargo){
             res.json ({
@@ -25,7 +26,7 @@ export async function crearCargo(req,res){
 export async function listarCargo(req, res){
     try{
         let cargos = await Cargo.findAll({
-             attributes: ['id','nombre']
+            attributes: ['id','nombre','operativo']
         });
         res.json({
             code:200,
@@ -42,15 +43,15 @@ export async function listarCargo(req, res){
 }
 
 export async function editarCargo (req, res){
-    const {id, nombre} =req.body;
-    if(id && nombre){
+    const {id, nombre, operativo} =req.body;
+    if(id && nombre && operativo){
         try{
             let cargo = await Cargo.findOne({
                 where: {id:id},
-                attributes: ['id','nombre']
+                attributes: ['id','nombre','operativo']
             });
             if(cargo){
-                cargo.update({nombre});
+                cargo.update({nombre,operativo});
                 res.json ({
                     code:200,
                     message: 'El cargo ha sido editado exitosamente',
@@ -77,15 +78,15 @@ export async function editarCargo (req, res){
 }
 
 export async function eliminarCargo (req, res){
-    const{id,nombre} = req.body;
-    if(id && nombre){
+    const{id,nombre, operativo} = req.body;
+    if(id && nombre && operativo){
         try{
             let cargo = await Cargo.findOne({
                 where: {id:id},
-                attributes: ['id','nombre']
+                attributes: ['id']
             });
             if(cargo){
-                cargo.destroy({nombre});
+                await cargo.update({operativo:false});
                 res.json ({
                     code:200,
                     message: 'El cargo ha sido eliminado exitosamente',
@@ -106,6 +107,89 @@ export async function eliminarCargo (req, res){
         res.json({
             code:203,
             message: 'No ha ingresado campos para eliminar'
+        });
+    }
+}
+
+export async function BuscarCargoPorId(req, res) {
+    const {id} = req.body;
+    try{
+        let cargo = await Cargo.findOne({
+            where: {id:id},
+            attributes: ['id', 'nombre', 'operativo' 
+            ]
+        });
+        if(cargo){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado el cargo',
+                data: cargo
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'El cargo con ese id no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarCargoPorNombre(req, res) {
+    const {nombre} = req.body;
+    try{
+        let cargo = await Cargo.findOne({
+            where: {nombre:nombre},
+            attributes: ['id', 'nombre', 'operativo' 
+            ]
+        });
+        if(cargo){
+            res.json({
+                code: 200,
+                message: 'Se ha encontrado el cargo',
+                data: cargo
+            });
+        } else {
+            res.json({
+                code: 400,
+                message: 'El cargo con ese nombre no existe'
+            });
+        }
+    } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function BuscarCargoPorOperatividad(req, res) {
+    const {operativo} = req.body;
+    try{
+        let cargos = await Cargo.findAll({
+            where: {operativo:operativo},
+            attributes: ['id','nombre','operativo']
+        });
+        if(cargos.length>0){
+            res.json({
+                code:200,
+                message: 'Los cargos han sido encontrados con exito',
+                data : cargos
+            });
+        }else{
+            res.json({
+                code:400,
+                message: 'Los cargos no existen'
+            });
+        }
+    }catch(e){
+        res.json({
+            code:401,
+            message: 'ERROR'
         });
     }
 }
