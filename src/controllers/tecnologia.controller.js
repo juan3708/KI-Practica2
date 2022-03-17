@@ -114,8 +114,7 @@ export async function BuscarTecnologiaPorId(req, res) {
     try{
         let tecnologia = await Tecnologia.findOne({
             where: {id:id},
-            attributes: ['id', 'nombre' 
-            ]
+            attributes: ['id', 'nombre']
         });
         if(tecnologia){
             res.json({

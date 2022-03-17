@@ -71,7 +71,7 @@ export async function editarPostulante (req, res){
                 where: {id:id},
                 include:[{
                     model: Aviso,
-                    attributes: ['id']
+                    attributes: ['id', 'titulo', 'funciones', 'rango_inicial', 'rango_final', 'estado', 'cargo_id']
                 }],
                 attributes: ['id',
                     'nombre',
@@ -229,7 +229,7 @@ export async function BuscarPostulantePorApellido(req, res) {
             where: {apellido:apellido},
             include:[{
                 model: Aviso,
-                attributes: ['id']
+                attributes: ['id', 'titulo', 'funciones', 'rango_inicial', 'rango_final', 'estado', 'cargo_id']
             }],
             attributes: ['id',
                 'nombre',
@@ -268,7 +268,7 @@ export async function BuscarPostulantePorCorreo (req, res) {
             where: {correo: correo },
             include:[{
                 model: Aviso,
-                attributes: ['id']
+                attributes: ['id', 'titulo', 'funciones', 'rango_inicial', 'rango_final', 'estado', 'cargo_id']
             }],
             attributes: ['id',
                 'nombre',
@@ -307,7 +307,7 @@ export async function BuscarPostulantePorExperiencia(req, res) {
             where: {anios_de_experiencia:anios_de_experiencia},
             include:[{
                 model: Aviso,
-                attributes: ['id']
+                attributes: ['id', 'titulo', 'funciones', 'rango_inicial', 'rango_final', 'estado', 'cargo_id']
             }],
             attributes: ['id',
                 'nombre',
@@ -346,7 +346,7 @@ export async function BuscarPostulantePorOperatividad(req, res) {
             where: {operativo:operativo},
             include:[{
                 model: Aviso,
-                attributes: ['id']
+                attributes: ['id', 'titulo', 'funciones', 'rango_inicial', 'rango_final', 'estado', 'cargo_id']
             }],
             attributes: ['id',
             'nombre',

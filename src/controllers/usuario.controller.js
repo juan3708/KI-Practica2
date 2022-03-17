@@ -1,23 +1,33 @@
 import Usuario from "../models/usuario";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
+const saltRound = 10;
+const secret = 'kiteknology2022';
+const expires = '24h';
 export async function crearUsuario(req, res){
     const {nombre, apellido, correo, password, operativo} = req.body;
     try{
+        //encriptacion de contraseña.
+        let passwordEncrypt = bcrypt.hashSync(password, saltRound);
         let nuevoUsuario = await Usuario.create({
             nombre,
             apellido,
             correo,
-            password,
+            password: passwordEncrypt,
             operativo
         })
         if(nuevoUsuario){
+            let token = jwt.sign({nuevoUsuario}, secret, {expiresIn:expires});
             res.json({
                 code:200,
                 message: 'Usuario Creado Con Exito',
-                data : nuevoUsuario
+                data : nuevoUsuario, 
+                token
             });
         }
     }catch(e){
+        console.log(e);
         res.json({
             code:400,
             message: 'Error al crear al usuario',
@@ -65,7 +75,7 @@ export async function editarUsuario (req, res){
                 'operativo']
             });
             if(usuario){
-                rol.update ({id, nombre, apellido,
+                usuario.update ({id, nombre, apellido,
                     correo,
                     password,
                     operativo});
@@ -246,6 +256,47 @@ export async function BuscarUsuarioPorCorreo (req, res) {
             });
         }
     } catch (e) {
+        res.json({
+            code: 401,
+            message: 'ERROR'
+        });
+    }
+}
+
+export async function singIn (req, res) {
+    const {correo, password} = req.body;
+    try {
+        let usuario = await Usuario.findOne({
+            where: {correo},
+            attributes:['id', 'nombre',
+                'apellido',
+                'correo',
+                'password',
+                'operativo']
+        });
+        if (usuario) {
+            if (bcrypt.compareSync(password, usuario.password)){
+                let token = jwt.sign({usuario}, secret, {expiresIn:expires});
+                res.json({
+                    code: 200,
+                    message: 'Ha ingresado con exito',
+                    data: usuario,
+                    token
+                });
+            }else{
+                res.json({
+                    code: 401,
+                    message: 'La contraseña ingresada es incorrecta'
+                });
+            }
+        } else {
+            res.json({
+                code: 400,
+                message: 'Por favor revise los datos ingresados'
+            });
+        }
+    } catch (e) {
+        console.log(e);
         res.json({
             code: 401,
             message: 'ERROR'

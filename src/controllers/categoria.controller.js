@@ -83,7 +83,7 @@ export async function eliminarCategoria (req, res){
         try{
             let categoria = await Categoria.findOne({
                 where: {id:id},
-                attributes: ['id']
+                attributes: ['id', 'nombre', 'operativo']
             });
             if(categoria){
                 await categoria.update({operativo:false});
@@ -117,7 +117,6 @@ export async function BuscarCategoriaPorId (req, res) {
         let categoria = await Categoria.findOne({
             where: { id: id },
             attributes: ['id','nombre','operativo']
-            
         });
         if (categoria) {
             res.json({
@@ -144,8 +143,7 @@ export async function BuscarCategoriaPorNombre(req, res) {
     try{
         let categoria = await Cargo.findOne({
             where: {nombre:nombre},
-            attributes: ['id', 'nombre', 'operativo'
-            ]
+            attributes: ['id', 'nombre', 'operativo']
         });
         if(categoria){
             res.json({
