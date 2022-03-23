@@ -1,5 +1,6 @@
-import {Sequelize} from 'sequelize';
+import {DataTypes, Sequelize} from 'sequelize';
 import {sequelize} from '../database/db';
+
 
 
 const Usuario = sequelize.define('usuario',{
@@ -30,6 +31,10 @@ const Usuario = sequelize.define('usuario',{
     password: {
         type: Sequelize.STRING,
         allowNull:false
+    },
+    operativo: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
     }
 },{
     timestamps: false,

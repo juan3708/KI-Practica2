@@ -33,9 +33,9 @@ export async function listarNoticia(req, res){
         let noticias = await Noticia.findAll({
             include:[{
                 model: Categoria,
-                attributes: ['id']
+                attributes: ['id', 'nombre', 'operativo']
             }],
-            attributes: ['id','titulo','cuerpo','estado', 'img']
+            attributes: ['id','titulo','cuerpo','estado', 'img', 'categoria_id']
         });
         res.json({
             code:200,
@@ -63,12 +63,12 @@ export async function editarNoticia (req, res){
                 where: {id:id},
                 include:[{
                     model: Categoria,
-                    attributes: ['id']
+                    attributes: ['id', 'nombre', 'operativo']
                 }],
                 attributes: ['id', 'titulo',
                     'cuerpo',
                     'estado',
-                    'img']
+                    'img', 'categoria_id']
             });
             if(noticia){
                 noticia.update({id, titulo, cuerpo, estado, img});
@@ -105,8 +105,7 @@ export async function BuscarNoticiaPorId (req, res) {
             attributes: ['id','titulo',
                 'cuerpo',
                 'estado', 
-                'img']
-            
+                'img', 'categoria_id']
         });
         if (noticia) {
             res.json({
@@ -136,7 +135,7 @@ export async function BuscarNoticiaPorTitulo(req, res) {
             attributes: ['id','titulo',
                 'cuerpo',
                 'estado', 
-                'img']
+                'img', 'categoria_id']
         });
         if(noticia){
             res.json({
@@ -168,7 +167,7 @@ export async function BuscarNoticiasPorEstado(req, res) {
             attributes: ['id','titulo',
                 'cuerpo',
                 'estado', 
-                'img']
+                'img', 'categoria_id']
         });
         if(noticias.length>0){
             res.json({
@@ -197,12 +196,12 @@ export async function BuscarNoticiasPorCategoria(req, res) {
         where: {categoria_id: categoria_id},
         include: [{
             model: Categoria,
-            attributes: ['nombre']
+            attributes: ['id', 'nombre', 'operativo']
         }],
         attributes: ['id','titulo',
             'cuerpo',
             'estado', 
-            'img']
+            'img', 'categoria_id']
         });
         if(noticias.length>0){
             res.json({

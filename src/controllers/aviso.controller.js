@@ -33,7 +33,7 @@ export async function listarAvisos(req, res){
         let avisos = await Aviso.findAll({
             include:[{
                 model: Cargo,
-                attributes: ['id']
+                attributes: ['id', 'nombre', 'operativo']
             }],
             attributes: ['id','titulo', 'funciones', 'rango_inicial' , 'rango_final', 'estado']
         });
@@ -201,7 +201,7 @@ export async function BuscarAvisoPorCargo(req, res) {
         where: {cargo_id:cargo_id},
         include: [{
             model: Cargo,
-            attributes: ['nombre']
+            attributes: ['id','nombre', 'operativo']
         }],
         attributes: ['id', 'titulo',
         'funciones',
