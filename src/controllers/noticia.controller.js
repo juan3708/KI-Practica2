@@ -43,6 +43,7 @@ export async function listarNoticia(req, res){
             noticias
         });
     }catch(e){
+        console.log(e);
         res.json({
             code:400,
             message: 'Error al listar las noticias',

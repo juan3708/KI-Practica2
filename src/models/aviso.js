@@ -2,7 +2,7 @@ import {Sequelize} from 'sequelize';
 import {sequelize} from '../database/db';
 import Cargo from './cargo';
 import Postulante from './postulante';
-import Usuario from './usuario';
+import Tecnologia from './tecnologia';
 
 const Aviso = sequelize.define('aviso' ,{
     id: {
@@ -43,13 +43,7 @@ const Aviso = sequelize.define('aviso' ,{
     tableName: 'aviso'
 });
 
-//Definicion relacion con usuario
-
-Aviso.belongsToMany (Usuario, {through: "usuario_has_aviso"});
-Usuario.belongsToMany(Aviso, {through: "usuario_has_aviso"});
-
-//Definicion relacion con postulante 
-
+//Definicion relacion con Postulante 
 Aviso.hasMany(Postulante, {
     foreignKey: {
         name: 'aviso_id',
@@ -62,5 +56,23 @@ Postulante.belongsTo(Aviso, {
     },
     sourceKey: 'id'
 });
+
+//Definicion relacion con Cargo
+Aviso.belongsTo(Cargo, {
+    foreignKey: {
+        name: 'cargo_id',
+    },
+    sourceKey: 'id'
+});
+Cargo.hasMany(Aviso, {
+    foreignKey: {
+        name: 'cargo_id',
+    },
+    sourceKey: 'id'
+});
+
+//Definicion relacion con Tecnología
+Aviso.belongsToMany(Tecnologia,{through: "aviso_has_tecnologia"});
+Tecnologia.belongsToMany (Aviso,{through: "aviso_has_tecnologia"});
 
 export default Aviso;
