@@ -8,10 +8,12 @@ import { HomepageModule } from './modules/homepage/homepage.module';
 import { JobNoticesModule } from './modules/job-notices/job-notices.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModule } from './modules/login/login.module';
+import { AdministratorModule } from './modules/administrator/administrator.module';
 
 import { AppComponent } from './app.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
+
 
 
 
@@ -34,7 +36,8 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
     NewsModule,
     JobNoticesModule,
     NgbModule,
-    LoginModule
+    LoginModule,
+    AdministratorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

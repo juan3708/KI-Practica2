@@ -34,12 +34,16 @@ body {
     font-size: 48px;
     color: #00B1DD;
     padding-top: 12px;
-    padding-right: 18px;
+    padding-left: 18px;
 }
 
 .icon{
     width: 10%;
     height: 100%;
+}
+
+.usericon{
+    padding-left: 490%;
 }
 
 
@@ -49,8 +53,7 @@ body {
 .barra-lateral {
     background: #F7921E;
     color: #fff;
-    min-width: 250px;
-    min-height: 811px;
+    height: 100vh;
     padding: 0;
 }
 
@@ -171,6 +174,10 @@ body {
     }
 }
 
+.name{
+    text-transform: capitalize; //transforma la primera letra de cada palabra a uppercase
+}
+
 
 
 
@@ -185,3 +192,31 @@ body {
     box-shadow: 3px 3px 0px transparent;
     transition: 0.5s;
     }
+
+.btnRole{
+    background-color: #F7921E;
+    margin-right: 4px;
+}
+
+.btnEdit{
+    background-color: #00B1DD;
+    margin-right: 4px;
+}
+
+.btnDelete{
+    background-color: #b92828;
+    margin-right: 4px;
+}
+
+.glyphicon{
+    margin-right: 3px;
+}
+
+.modal-dialog{
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
