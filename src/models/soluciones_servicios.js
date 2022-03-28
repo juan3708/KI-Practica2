@@ -1,6 +1,5 @@
 import {DataTypes, Sequelize} from 'sequelize';
-import {sequelize} from '../database/db';
-import Usuario from './usuario';
+import {sequelize} from '../config/db';
 
 const Soluciones_servicios = sequelize.define('soluciones_servicios', {
     id: {
@@ -40,9 +39,5 @@ const Soluciones_servicios = sequelize.define('soluciones_servicios', {
     timestamps: false,
     tableName: 'soluciones_servicios'
 });
-
-//Definicion relacion con usuario
-Soluciones_servicios.belongsToMany (Usuario, {through: "soluciones_servicios_has_usuario"});
-Usuario.belongsToMany (Soluciones_servicios, {through: "soluciones_servicios_has_usuario"});
 
 export default Soluciones_servicios;

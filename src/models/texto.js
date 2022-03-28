@@ -1,6 +1,5 @@
 import {DataTypes, Sequelize} from 'sequelize';
-import {sequelize} from '../database/db';
-import Usuario from './usuario';
+import {sequelize} from '../config/db';
 
 const Texto = sequelize.define('texto' ,{
     id: {
@@ -32,9 +31,5 @@ const Texto = sequelize.define('texto' ,{
     timestamps: false,
     tableName: 'texto'
 });
-
-//Definicion relacion usuario
-Texto.belongsToMany (Usuario,{through: "texto_has_usuario"});
-Usuario.belongsToMany(Texto,{through: "texto_has_usuario"});
 
 export default Texto;

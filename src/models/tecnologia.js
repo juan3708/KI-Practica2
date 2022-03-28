@@ -1,6 +1,5 @@
 import {DataTypes, Sequelize} from 'sequelize';
-import {sequelize} from '../database/db';
-import Aviso from './aviso';
+import {sequelize} from '../config/db';
 
 const Tecnologia = sequelize.define('tecnologia',{
     id: {
@@ -20,9 +19,5 @@ const Tecnologia = sequelize.define('tecnologia',{
     timestamps: false,
     tableName: 'tecnologia'
 });
-
-//Definicion relacion aviso
-Tecnologia.belongsToMany (Aviso,{through: "aviso_has_tecnologia"});
-Aviso.belongsToMany(Tecnologia,{through: "aviso_has_tecnologia"});
 
 export default Tecnologia;

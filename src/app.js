@@ -11,7 +11,7 @@ import avisoRoutes from '../src/routes/aviso';
 import postulanteRoutes from '../src/routes/postulante';
 import bitacoraRoutes from '../src/routes/bitacora';
 import UsuarioRoutes from '../src/routes/usuario';
-
+import auth from './middlewares/auth';
 
 
 const app = express();

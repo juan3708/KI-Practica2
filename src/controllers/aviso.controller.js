@@ -1,5 +1,6 @@
 import Aviso from "../models/aviso";
 import Cargo from "../models/cargo";
+import Tecnologia from "../models/tecnologia";
 
 export async function crearAviso (req, res){
     const {titulo, funciones, rango_inicial, rango_final, estado, cargo_id} =req.body;
@@ -34,6 +35,10 @@ export async function listarAvisos(req, res){
             include:[{
                 model: Cargo,
                 attributes: ['id', 'nombre', 'operativo']
+            },
+            {
+                model: Tecnologia,
+                attributes: ['id', 'nombre']
             }],
             attributes: ['id','titulo', 'funciones', 'rango_inicial' , 'rango_final', 'estado']
         });
@@ -225,10 +230,6 @@ export async function BuscarAvisoPorCargo(req, res) {
         res.json({
             code: 401,
             message: 'Error',
-
         });
     }
 }
-
-
-

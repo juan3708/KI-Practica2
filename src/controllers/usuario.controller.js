@@ -1,12 +1,15 @@
 import Usuario from "../models/usuario";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import Rol from "../models/rol";
+import authConfig from "../config/authConfig";
 
-const saltRound = 10;
-const secret = 'kiteknology2022';
-const expires = '24h';
+const saltRound = authConfig.saltRound;
+const secret = authConfig.secret;
+const expires = authConfig.expires;
 export async function crearUsuario(req, res){
-    const {nombre, apellido, correo, password, operativo} = req.body;
+    const {nombre, apellido, correo, password, operativo, roles} = req.body;
+    console.log(roles);
     try{
         //encriptacion de contraseña.
         let passwordEncrypt = bcrypt.hashSync(password, saltRound);
@@ -17,7 +20,13 @@ export async function crearUsuario(req, res){
             password: passwordEncrypt,
             operativo
         })
-        if(nuevoUsuario){
+        if(nuevoUsuario){ //asigna uno o varios roles al usuario
+            for (let i = 0; i < roles.length; i++) {
+                let roldb= await Rol.findOne({
+                    where:{id:roles[i]}
+                });
+                nuevoUsuario.addRol(roldb);
+            }
             let token = jwt.sign({nuevoUsuario}, secret, {expiresIn:expires});
             res.json({
                 code:200,
@@ -39,6 +48,12 @@ export async function crearUsuario(req, res){
 export async function listarUsuarios (req, res){
     try{
         let usuarios = await Usuario.findAll({
+            include:{
+                model: Rol,
+                through: { 
+                   attributes: []
+                }
+            },
             attributes: ['id', 'nombre',
             'apellido',
             'correo',

@@ -1,7 +1,6 @@
 import {DataTypes, Sequelize} from 'sequelize';
-import {sequelize} from '../database/db';
+import {sequelize} from '../config/db';
 import Categoria from './categoria';
-import Usuario from './usuario';
 
 
 const Noticia = sequelize.define('noticia' ,{
@@ -39,8 +38,18 @@ const Noticia = sequelize.define('noticia' ,{
     tableName: 'noticia'
 });
 
-//Definicion relacion con usuario
-Noticia.belongsToMany (Usuario, {through: "usuario_has_noticia"});
-Usuario.belongsToMany(Noticia, {through: "usuario_has_noticia"});
+//Definicion relacion con categoria
+Noticia.belongsTo(Categoria, {
+    foreignKey: {
+        name: 'categoria_id',
+    },
+    sourceKey: 'id'
+});
+Categoria.hasMany(Noticia, {
+    foreignKey: {
+        name: 'categoria_id',
+    },
+    sourceKey: 'id'
+});
 
 export default Noticia;

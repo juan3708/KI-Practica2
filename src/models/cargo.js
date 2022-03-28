@@ -1,6 +1,5 @@
 import {DataTypes, Sequelize} from 'sequelize';
-import {sequelize} from '../database/db';
-import Aviso from '../models/aviso';
+import {sequelize} from '../config/db';
 
 const Cargo = sequelize.define('cargo', {
     id: {
@@ -19,21 +18,6 @@ const Cargo = sequelize.define('cargo', {
 },{
     timestamps: false,
     tableName: 'cargo'
-});
-
-//Definicion relacion con aviso
-
-Cargo.hasMany(Aviso,{
-    foreignKey:{
-        name: 'cargo_id',
-    },
-    sourceKey: 'id'
-})
-Aviso.belongsTo (Cargo, {
-    foreignKey: {
-        name: 'cargo_id',
-    },
-    sourceKey: 'id'
 });
 
 export default Cargo;
