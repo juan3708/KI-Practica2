@@ -1,5 +1,5 @@
 import {DataTypes, Sequelize} from 'sequelize';
-import {sequelize} from '../database/db';
+import {sequelize} from '../config/db';
 
 const Categoria = sequelize.define('categoria',{
     id: {

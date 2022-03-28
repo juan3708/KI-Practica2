@@ -2,10 +2,11 @@ import Usuario from "../models/usuario";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import Rol from "../models/rol";
+import authConfig from "../config/authConfig";
 
-const saltRound = 10;
-const secret = 'kiteknology2022';
-const expires = '24h';
+const saltRound = authConfig.saltRound;
+const secret = authConfig.secret;
+const expires = authConfig.expires;
 export async function crearUsuario(req, res){
     const {nombre, apellido, correo, password, operativo, roles} = req.body;
     console.log(roles);

@@ -1,5 +1,5 @@
 import {Sequelize} from 'sequelize';
-import {sequelize} from '../database/db';
+import {sequelize} from '../config/db';
 import Cargo from './cargo';
 import Postulante from './postulante';
 import Tecnologia from './tecnologia';

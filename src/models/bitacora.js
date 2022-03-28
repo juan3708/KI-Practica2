@@ -1,5 +1,5 @@
 import {Sequelize} from 'sequelize';
-import {sequelize} from '../database/db';
+import {sequelize} from '../config/db';
 
 
 const Bitacora = sequelize.define('bitacora' ,{
