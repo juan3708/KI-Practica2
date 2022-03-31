@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { BuscarUsuarioPorApellido, BuscarUsuarioPorCorreo, BuscarUsuarioPorId, BuscarUsuarioPorNombre, 
-    crearUsuario, editarUsuario, eliminarUsuario, listarUsuarios, singIn } from "../controllers/usuario.controller";
+    crearUsuario, editarUsuario, eliminarUsuario, listarUsuarios, signIn, signIn } from "../controllers/usuario.controller";
 import auth from "../middlewares/auth";
 
 const router = Router();
@@ -13,6 +13,6 @@ router.get('/buscar/id', auth, BuscarUsuarioPorId);
 router.get('/buscar/nombre', auth, BuscarUsuarioPorNombre);
 router.get('/buscar/apellido', auth, BuscarUsuarioPorApellido);
 router.get('/buscar/correo', auth, BuscarUsuarioPorCorreo);
-router.post('/login', singIn);
+router.post('/login', signIn);
 
 export default router; 

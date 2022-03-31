@@ -9,7 +9,6 @@ const secret = authConfig.secret;
 const expires = authConfig.expires;
 export async function crearUsuario(req, res){
     const {nombre, apellido, correo, password, operativo, roles} = req.body;
-    console.log(roles);
     try{
         //encriptacion de contraseña.
         let passwordEncrypt = bcrypt.hashSync(password, saltRound);
@@ -278,11 +277,17 @@ export async function BuscarUsuarioPorCorreo (req, res) {
     }
 }
 
-export async function singIn (req, res) {
+export async function signIn (req, res) {
     const {correo, password} = req.body;
     try {
         let usuario = await Usuario.findOne({
             where: {correo},
+            include:{
+                model: Rol,
+                through: { 
+                   attributes: []
+                }
+            },
             attributes:['id', 'nombre',
                 'apellido',
                 'correo',
