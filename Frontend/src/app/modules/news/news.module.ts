@@ -7,7 +7,7 @@ import { NewsDetailComponent } from './components/news-detail/news-detail.compon
 
 
 @NgModule({
-  declarations: [NewsComponent, NewsDetailComponent],
+  declarations: [NewsDetailComponent],
   imports: [
     CommonModule,
     NewsRoutingModule

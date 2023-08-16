@@ -13,6 +13,7 @@ import { AdministratorModule } from './modules/administrator/administrator.modul
 import { AppComponent } from './app.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavigationComponent } from './layout/navigation/navigation.component';
+import { NewsComponent } from './modules/news/components/news/news.component';
 
 
 
@@ -26,6 +27,7 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
     AppComponent,
     FooterComponent,
     NavigationComponent,
+    NewsComponent
   ], //imports de los modelos
   imports: [
     BrowserModule,
